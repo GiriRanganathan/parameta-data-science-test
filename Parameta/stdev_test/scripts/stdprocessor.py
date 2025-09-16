@@ -6,7 +6,7 @@ import argparse
 
 class RollingStandardDeviationCalculator:
     """
-    Efficient rolling standard deviation calculator for price data.
+    Rolling standard deviation calculator for price data.
     """
 
     def __init__(self, window_size: int = 20):
@@ -24,7 +24,7 @@ class RollingStandardDeviationCalculator:
 
     def _identify_contiguous_sequences(self, df: pd.DataFrame) -> pd.DataFrame:
         """
-        Identify contiguous hourly sequences for each security.
+        Identifying contiguous hourly sequences for each security.
         """
         df = df.copy()
         df['time_diff'] = df.groupby('security_id')['snap_time'].diff()
@@ -41,7 +41,7 @@ class RollingStandardDeviationCalculator:
         end_time: str = None
     ) -> pd.DataFrame:
         """
-        Calculate rolling standard deviations for the specified time period.
+        Calculating rolling standard deviations for the specified time period.
         """
         df_with_groups = self._identify_contiguous_sequences(df)
 
@@ -70,9 +70,10 @@ class RollingStandardDeviationCalculator:
 
             return result.iloc[self.window_size - 1:]
 
+        # FutureWarning fix - exclude grouping columns from apply
         results = (
             df_with_groups.groupby("group_id", group_keys=False)
-            .apply(_calc_group)
+            .apply(_calc_group, include_groups=False)
         )
 
         if results.empty:
