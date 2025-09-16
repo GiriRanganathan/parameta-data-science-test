@@ -13,7 +13,7 @@ Repository with solution for parameta datascience test
    **Run Code**:
    Command to run rateprocessor.py code
    
-   ```python Parameta/rates_test/scripts/rateprocessor.py```
+   ```python Parameta/rates_test/scripts/ratesprocessor.py```
 
 3. **Problem Statment-02**:
    Goal: To generate a standard deviation for a security id at a given hourly snap time, you need the most recent set of 20 contiguous hourly snap values for the security id. By contiguous we mean there are no gaps in the set of hourly snaps.
