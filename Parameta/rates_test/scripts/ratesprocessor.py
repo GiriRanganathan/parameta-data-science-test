@@ -198,6 +198,5 @@ if __name__ == '__main__':
 
     end_time = time.time()
     print(f"Processing completed in {end_time - start_time:.2f} seconds")
-    print(f"Processed {len(result)} records")
     print(f"Records with sufficient data: {result['has_sufficient_data'].sum()}")
     print(f"Records requiring conversion: {(result['convert_price'] == True).sum()}")
