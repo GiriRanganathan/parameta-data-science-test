@@ -19,6 +19,7 @@ class RateProcessor:
         self.result = None
 
     def load_data(self):
+        """function to load data, later can be customised to read from database"""
         # Load currency reference data file
         ccy_file = self.data_path / "rates_ccy_data.csv"
         self.ccy_data = pd.read_csv(ccy_file)
@@ -46,6 +47,7 @@ class RateProcessor:
         price_pairs = self.price_data['ccy_pair'].values
         price_times = self.price_data['timestamp'].values
 
+        ##Todo-crete a cache for further development
         spot_pairs = self.spot_rate_data['ccy_pair'].values
         spot_times = self.spot_rate_data['timestamp'].values
         spot_rates = self.spot_rate_data['spot_mid_rate'].values
