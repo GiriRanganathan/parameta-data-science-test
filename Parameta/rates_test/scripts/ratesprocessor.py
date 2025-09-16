@@ -42,7 +42,6 @@ class RateProcessor:
         start_time = time.time()
         logger.info("Finding spot rates...")
 
-        # Converting to numpy arrays
         price_pairs = self.price_data['ccy_pair'].values
         price_times = self.price_data['timestamp'].values
 
@@ -67,7 +66,7 @@ class RateProcessor:
 
         # Results
         result_rates = np.full(len(price_pairs), np.nan)
-        one_hour_ns = pd.Timedelta(hours=1).value  # nanoseconds
+        one_hour_ns = pd.Timedelta(hours=1).value
 
         lookup_start = time.time()
         for pair in np.unique(price_pairs):
@@ -84,7 +83,7 @@ class RateProcessor:
             pair_spot_times = spot_times_sorted[start_idx:end_idx]
             pair_spot_rates = spot_rates_sorted[start_idx:end_idx]
 
-            # Vectorized lookup
+            #lookup
             insert_positions = np.searchsorted(pair_spot_times, pair_price_times, side='right') - 1
             valid_positions = insert_positions >= 0
 

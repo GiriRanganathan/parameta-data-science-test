@@ -99,7 +99,7 @@ def test_full_process_pipeline(sample_data):
     result = processor.process_pipeline()
 
     # Check output file exists
-    output_file = Path("Parameta/rates_test/results/rates_result.csv")
+    output_file = Path("Parameta/rates_test/results/rates_result_testing.csv")
     assert output_file.exists()
 
     # Check essential columns

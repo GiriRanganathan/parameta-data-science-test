@@ -121,7 +121,7 @@ class RollingStandardDeviationCalculator:
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Calculate rolling standard deviation for price data")
+    parser = argparse.ArgumentParser(description="Calculate rolling standard deviation")
     
     # Default paths relative to this script
     default_input = Path(__file__).parent.parent / "data" / "stdev_price_data.parq"
