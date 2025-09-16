@@ -161,12 +161,18 @@ class RateProcessor:
     def save_result(self, output_path="Parameta/rates_test/results"):
         """To export results to csv in results folder"""
         output_path = Path(output_path)
-        output_path.parent.mkdir(exist_ok=True)
+        output_path.mkdir(parents=True, exist_ok=True) 
 
         output_file = output_path / "rates_result.csv"
         output_cols = [
-            'ccy_pair', 'timestamp', 'price', 'new_price',
-            'spot_mid_rate', 'conversion_factor', 'convert_price',
+            'security_id',
+            'ccy_pair', 
+            'timestamp', 
+            'price', 
+            'new_price',
+            'spot_mid_rate', 
+            'conversion_factor', 
+            'convert_price',
             'conversion_status'
         ]
 
