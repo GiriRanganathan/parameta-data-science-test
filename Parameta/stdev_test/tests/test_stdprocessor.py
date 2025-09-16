@@ -5,21 +5,17 @@ import sys
 import os
 from pathlib import Path
 
-# Add project root to path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
 sys.path.insert(0, project_root)
 
 from Parameta.stdev_test.scripts.stdprocessor import RollingStandardDeviationCalculator
 
-
-# ---------------- Fixtures ---------------- #
-
 @pytest.fixture
 def sample_price_data(tmp_path):
-    """Create sample input data for testing rolling std with various scenarios"""
+    """Sample input data for testing rolling std with various scenarios"""
     data = []
     
-    # Security 1: Complete hourly data (25 hours - enough for rolling window)
+    # Security 1: Complete hourly data (25 hours)
     timestamps1 = pd.date_range("2021-11-20 00:00", periods=25, freq="H")
     for i, ts in enumerate(timestamps1):
         base_price = 100 + i * 0.5
@@ -115,7 +111,7 @@ class TestContiguousSequences:
         result = calculator._identify_contiguous_sequences(sec1_data)
         
         assert 'group_id' in result.columns
-        assert result['group_id'].nunique() == 1  # Should be one contiguous group
+        assert result['group_id'].nunique() == 1 
     
     def test_identify_contiguous_sequences_with_gaps(self, sample_price_data):
         file_path, _ = sample_price_data
@@ -127,7 +123,7 @@ class TestContiguousSequences:
         result = calculator._identify_contiguous_sequences(sec2_data)
         
         assert 'group_id' in result.columns
-        assert result['group_id'].nunique() > 1  # Should have multiple groups due to gap
+        assert result['group_id'].nunique() > 1 
 
 
 class TestRollingStdCalculation:
@@ -174,7 +170,7 @@ class TestRollingStdCalculation:
         
         result = calculator.calculate_rolling_std(df, start_time, end_time)
         
-        # Check that results are within specified time range
+        # To Check that results are within specified time range
         if len(result) > 0:
             assert result['snap_time'].min() >= pd.to_datetime(start_time)
             assert result['snap_time'].max() <= pd.to_datetime(end_time)
