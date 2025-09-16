@@ -7,13 +7,13 @@ Repository with solution for parameta datascience test
          If there is insufficient data to create a new price then capture this fact in some way
    
    **Requirements**:
-   Code requirements are in requirements.txt
    Command to install:
-   pip install -r requirements.txt
+   ```pip install -r requirements.txt```
 
    **Run Code**:
    Command to run rateprocessor.py code
-   python Parameta/rates_test/scripts/rateprocessor.py
+   
+   ```python Parameta/rates_test/scripts/rateprocessor.py```
 
 3. **Problem Statment-02**:
    Goal: To generate a standard deviation for a security id at a given hourly snap time, you need the most recent set of 20 contiguous hourly snap values for the security id. By contiguous we mean there are no gaps in the set of hourly snaps.
@@ -21,10 +21,8 @@ Repository with solution for parameta datascience test
    **Requirements**:
    Code requirements are in requirements.txt
    Command to install:
-   pip install -r requirements.txt
+   ```pip install -r requirements.txt```
 
    **Run Code**:
    Command to run stdprocessor.py code
-   python Parameta/stdev_test/scripts/stdprocessor.py \
-    --start_time "2021-11-20 00:00:00" \
-    --end_time "2021-11-23 09:00:00"
+   ```python Parameta/stdev_test/scripts/stdprocessor.py \--start_time "2021-11-20 00:00:00" \--end_time "2021-11-23 09:00:00"```
