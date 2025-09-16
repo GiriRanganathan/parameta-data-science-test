@@ -3,6 +3,7 @@ import numpy as np
 from pathlib import Path
 import logging
 import time
+import pyarrow
 
 # Initating Logging
 logging.basicConfig(level=logging.INFO)
@@ -25,13 +26,13 @@ class RateProcessor:
 
         # Load price data file
         price_file = self.data_path / "rates_price_data.parq"
-        self.price_data = pd.read_parquet(price_file)
+        self.price_data = pd.read_parquet(price_file,engine="pyarrow")
         self.price_data['timestamp'] = pd.to_datetime(self.price_data['timestamp'])
         logger.info(f"Loaded price data: {len(self.price_data)} rows")
 
         # Load spot rate data file
         spot_file = self.data_path / "rates_spot_rate_data.parq"
-        self.spot_rate_data = pd.read_parquet(spot_file)
+        self.spot_rate_data = pd.read_parquet(spot_file,engine="pyarrow")
         self.spot_rate_data['timestamp'] = pd.to_datetime(self.spot_rate_data['timestamp'])
         logger.info(f"Loaded spot rate data: {len(self.spot_rate_data)} rows")
 

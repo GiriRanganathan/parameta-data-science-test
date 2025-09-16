@@ -17,7 +17,7 @@ class RollingStandardDeviationCalculator:
         """
         Load price data from parquet file.
         """
-        df = pd.read_parquet(file_path)
+        df = pd.read_parquet(file_path,engine="pyarrow")
         df['snap_time'] = pd.to_datetime(df['snap_time'])
         df = df.sort_values(['security_id', 'snap_time']).reset_index(drop=True)
         return df

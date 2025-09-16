@@ -97,7 +97,6 @@ def test_calculate_new_prices(sample_data):
 def test_full_process_pipeline(sample_data, tmp_path):
     processor = RateProcessor(data_dir=sample_data)
     result = processor.process_pipeline(output_path=str(tmp_path), filename="rates_result_testing.csv")
-    # Now result is the DataFrame, not the file path
     
     # Check that the custom test file was created
     output_file = tmp_path / "rates_result_testing.csv"
