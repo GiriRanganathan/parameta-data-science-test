@@ -10,6 +10,11 @@ Repository with solution for parameta datascience test
    Command to install:
    ```pip install -r requirements.txt```
 
+   **Files Used**
+   - rates_ccy_data.csv
+   - rates_price_data.parq
+   - rates_spot_rate_data.parq
+
    **Run Code**:
    Command to run rateprocessor.py code
    
@@ -22,6 +27,9 @@ Repository with solution for parameta datascience test
    Code requirements are in requirements.txt
    Command to install:
    ```pip install -r requirements.txt```
+
+   **Files Used**
+   - stdev_price_data.parq  
 
    **Run Code**:
    Command to run stdprocessor.py code
