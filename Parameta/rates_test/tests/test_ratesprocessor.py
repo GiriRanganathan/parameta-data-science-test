@@ -11,7 +11,7 @@ from Parameta.rates_test.scripts.ratesprocessor import RateProcessor
 
 @pytest.fixture
 def sample_data(tmp_path):
-    """Create sample input data for testing"""
+    """Sample input data for testing"""
 
     # rates_ccy_data.csv
     ccy_data = pd.DataFrame({
@@ -94,19 +94,30 @@ def test_calculate_new_prices(sample_data):
 
 # ---------------- Integration Test ---------------- #
 
-def test_full_process_pipeline(sample_data):
+def test_full_process_pipeline(sample_data, tmp_path):
     processor = RateProcessor(data_dir=sample_data)
-    result = processor.process_pipeline()
-
-    # Check output file exists
-    output_file = Path("Parameta/rates_test/results/rates_result_testing.csv")
+    result = processor.process_pipeline(output_path=str(tmp_path), filename="rates_result_testing.csv")
+    # Now result is the DataFrame, not the file path
+    
+    # Check that the custom test file was created
+    output_file = tmp_path / "rates_result_testing.csv"
     assert output_file.exists()
+    
+    # Read the saved file to verify it has data
+    df = pd.read_csv(output_file)
+    assert not df.empty
 
-    # Check essential columns
-    assert all(col in result.columns for col in [
-        "ccy_pair", "timestamp", "price", "new_price", "conversion_status"
-    ])
+    # Column checks on the returned result DataFrame
+    expected_columns = [
+        'security_id', 'ccy_pair', 'timestamp', 'price', 'new_price',
+        'spot_mid_rate', 'conversion_factor', 'convert_price', 'conversion_status'
+    ]
+    assert all(col in result.columns for col in expected_columns)
 
     # Ensure all statuses are valid
     valid_statuses = {"converted", "insufficient_spot", "no_conversion_required", "unsupported_ccy"}
     assert set(result["conversion_status"].unique()).issubset(valid_statuses)
+    
+    # Verify data integrity
+    assert len(result) > 0
+    assert len(df) == len(result)

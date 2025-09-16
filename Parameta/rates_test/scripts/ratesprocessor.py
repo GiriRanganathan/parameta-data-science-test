@@ -157,32 +157,33 @@ class RateProcessor:
         self.result = result
         logger.info(f"Calculated new prices for {len(result)} records")
 
-    def save_result(self, output_path="Parameta/rates_test/results"):
-        """To export results to csv in results folder"""
+    def save_result(self, output_path="Parameta/rates_test/results", filename="rates_result.csv"):
         output_path = Path(output_path)
-        output_path.mkdir(parents=True, exist_ok=True) 
+        output_path.mkdir(parents=True, exist_ok=True)
 
-        output_file = output_path / "rates_result.csv"
+        output_file = output_path / filename
         output_cols = [
             'security_id',
-            'ccy_pair', 
-            'timestamp', 
-            'price', 
+            'ccy_pair',
+            'timestamp',
+            'price',
             'new_price',
-            'spot_mid_rate', 
-            'conversion_factor', 
+            'spot_mid_rate',
+            'conversion_factor',
             'convert_price',
-            'conversion_status'
+            'conversion_status',
         ]
 
         self.result[output_cols].to_csv(output_file, index=False)
         logger.info(f"Results saved to {output_file}")
+        return output_file
 
-    def process_pipeline(self):
+
+    def process_pipeline(self, output_path="Parameta/rates_test/results", filename="rates_result.csv"):
         """Main pipeline"""
         self.load_data()
         self.calculate_new_prices()
-        self.save_result()
+        output_file = self.save_result(output_path=output_path, filename=filename)
         return self.result
 
 
