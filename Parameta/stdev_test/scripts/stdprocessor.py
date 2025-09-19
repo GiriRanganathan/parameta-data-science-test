@@ -185,8 +185,8 @@ if __name__ == '__main__':
 
     parser.add_argument("--input", type=str, default=default_input)
     parser.add_argument("--output", type=str, default=default_output)
-    parser.add_argument("--start_time", type=str)
-    parser.add_argument("--end_time", type=str)
+    parser.add_argument("--start_time", type=str, default="2021-11-20 00:00:00")
+    parser.add_argument("--end_time", type=str, default="2021-11-23 09:00:00")
 
     args = parser.parse_args()
 
