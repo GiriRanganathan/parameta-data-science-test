@@ -34,8 +34,7 @@ class RollingStandardDeviationCalculator:
         n_rows, n_cols = values.shape
         rolling_std = np.full((n_rows, n_cols), np.nan, dtype=np.float64)
         
-        # Create a sliding window view using numpy stride tricks for efficiency
-        # But maintain the exact same logic as original
+        # Creating sliding window view using numpy 
         window_buffer = np.full((self.config.window_size, n_cols), np.nan, dtype=np.float64)
         buffer_pos = 0
         last_valid_std = None
@@ -173,9 +172,7 @@ class RollingStandardDeviationCalculator:
         self.save_results(results, output_file)
         
         processing_time = time.time() - start_processing
-        print(f"Total processing time: {processing_time:.2f} seconds")
         print(f"Output shape: {results.shape}")
-        print(f"Unique security IDs: {results['security_id'].nunique()}")
         print(f"Time range: {results['snap_time'].min()} to {results['snap_time'].max()}")
         
         return results
@@ -188,8 +185,8 @@ if __name__ == '__main__':
 
     parser.add_argument("--input", type=str, default=default_input)
     parser.add_argument("--output", type=str, default=default_output)
-    parser.add_argument("--start_time", type=str, default="2021-11-20 00:00:00")
-    parser.add_argument("--end_time", type=str, default="2021-11-23 09:00:00")
+    parser.add_argument("--start_time", type=str)
+    parser.add_argument("--end_time", type=str)
 
     args = parser.parse_args()
 
